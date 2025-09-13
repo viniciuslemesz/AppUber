@@ -24,6 +24,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.appuber.ui.theme.AppUberTheme
 
 class PrimeiraTela : ComponentActivity() {
@@ -32,21 +34,17 @@ class PrimeiraTela : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppUberTheme {
-                Home()
+                AppNavigation()
             }
         }
     }
 }
 
 @Composable
-fun Home() {
-
-
+fun Home(navController: NavHostController) {
     var pesquisas by remember { mutableStateOf(listOf<String>()) }
 
     Scaffold(
-
-
         topBar = {
             Column(
                 modifier = Modifier
@@ -60,40 +58,33 @@ fun Home() {
                     style = MaterialTheme.typography.headlineMedium,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
-
-                // Barra de pesquisa
                 BarraPesquisa(aoPesquisar = { novaNota ->
                     pesquisas = pesquisas + novaNota
                 })
             }
         },
-        bottomBar = { BarraNav() }
+        bottomBar = { BarraNav(navController) }
     ) { paddingValues ->
-
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
             Spacer(modifier = Modifier.height(20.dp))
-
             LazyColumn {
                 items(pesquisas) { item ->
                     Pesquisar(item)
                     Spacer(modifier = Modifier.height(5.dp))
                 }
             }
-
             Spacer(modifier = Modifier.height(20.dp))
-
             TelaPrincipal()
         }
     }
 }
 
 @Composable
-fun BarraNav() {
+fun BarraNav(navController: NavHostController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -107,23 +98,51 @@ fun BarraNav() {
                 .padding(20.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(Icons.Outlined.Home,
-                contentDescription = "Icone home", modifier = Modifier.size(21.dp))
-            Text(text = "Home")
+
+
+            Button(
+                onClick = { navController.navigate("home") },
+                modifier = Modifier
+                    .height(60.dp)
+                    .width(120.dp)
+                    .clip(RoundedCornerShape(16.dp)),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
+            ) {
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Icon(Icons.Outlined.Home, contentDescription = "Home", modifier = Modifier.size(24.dp))
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text("Home")
+                }
+            }
 
             Spacer(modifier = Modifier.width(24.dp))
-            Icon(Icons.Outlined.MoreVert,
-                contentDescription = "Icone op", modifier = Modifier.size(18.dp))
-            Text(text = "Opções")
+            Button(
+                onClick = { navController.navigate("opcoes") },
+                modifier = Modifier
+                    .height(60.dp)
+                    .width(120.dp)
+                    .clip(RoundedCornerShape(16.dp)),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
+            ) {
 
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Icon(Icons.Outlined.MoreVert , contentDescription = "Opcoes", modifier = Modifier.size(24.dp))
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text("Opções")
+                }
+            }
             Spacer(modifier = Modifier.width(24.dp))
-            Icon(Icons.Outlined.Build,
-                contentDescription = "Icone atividade", modifier = Modifier.size(20.dp))
-            Text(text = "Ativdade")
-
+            Icon(Icons.Outlined.Build, contentDescription = "Atividade", modifier = Modifier.size(20.dp))
+            Text(text = "Atividade")
             Spacer(modifier = Modifier.width(24.dp))
-            Icon(Icons.Outlined.Person,
-                contentDescription = "Icone perfil", modifier = Modifier.size(21.dp))
+            Icon(Icons.Outlined.Person, contentDescription = "Conta", modifier = Modifier.size(21.dp))
             Text(text = "Conta")
         }
     }
@@ -132,8 +151,6 @@ fun BarraNav() {
 @Composable
 fun BarraPesquisa(aoPesquisar: (String) -> Unit) {
     var textoInput by remember { mutableStateOf("") }
-
-
     Spacer(modifier = Modifier.height(25.dp))
     Row(
         modifier = Modifier
@@ -187,7 +204,6 @@ fun TelaPrincipal() {
         Spacer(modifier = Modifier.height(25.dp))
         Text(text = "Sugestões", modifier = Modifier.padding(start = 12.dp, top = 16.dp))
         Spacer(modifier = Modifier.height(15.dp))
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -198,9 +214,7 @@ fun TelaPrincipal() {
             CardDeSugestao("Envios", Icons.Outlined.ShoppingCart)
             CardDeSugestao("Moto", Icons.Outlined.ArrowForward)
         }
-
         Spacer(modifier = Modifier.height(15.dp))
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -217,7 +231,6 @@ fun TelaPrincipal() {
                 contentScale = ContentScale.Crop
             )
         }
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -258,6 +271,7 @@ fun CardDeSugestao(texto: String, icone: ImageVector) {
 @Composable
 fun PreviewPrimeiraTela() {
     AppUberTheme {
-        Home()
+        val navController = rememberNavController()
+        Home(navController)
     }
 }
