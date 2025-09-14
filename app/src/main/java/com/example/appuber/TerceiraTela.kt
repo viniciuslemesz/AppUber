@@ -26,37 +26,37 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.appuber.ui.theme.AppUberTheme
 
-class SegundaTela : ComponentActivity() {
+class TerceiraTela : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             AppUberTheme {
                 val navController = rememberNavController()
-                Opcoes(navController)
+                Perfil(navController)
             }
         }
     }
 }
 
 @Composable
-fun Opcoes(navController: NavHostController) {
+fun Perfil(navController: NavHostController) {
     Scaffold(
         topBar = {},
-        bottomBar = { BarraNavigation(navController) }
+        bottomBar = { BarraNavigationPerfil(navController) }
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            TelaOpcoes()
+            TelaPerfil()
         }
     }
 }
 
 @Composable
-fun BarraNavigation(navController: NavHostController) {
+fun BarraNavigationPerfil(navController: NavHostController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -164,37 +164,9 @@ fun BarraNavigation(navController: NavHostController) {
 }
 
 @Composable
-fun TelaOpcoes() {
+fun TelaPerfil() {
     Column {
-        Spacer(modifier = Modifier.height(25.dp))
-        Text(text = "Sugestões", modifier = Modifier.padding(start = 12.dp, top = 16.dp))
-        Spacer(modifier = Modifier.height(15.dp))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .height(120.dp)
-                .clip(RoundedCornerShape(16.dp))
-                .background(Color.Gray),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.imagem_blackfriday),
-                contentDescription = "Promoção Black Friday",
-                modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)),
-                contentScale = ContentScale.Crop
-            )
-        }
-        Spacer(modifier = Modifier.height(15.dp))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            SegundoCardDeSug("Viagem", Icons.Outlined.LocationOn)
-            SegundoCardDeSug("Envios", Icons.Outlined.ShoppingCart)
-        }
+
         Spacer(modifier = Modifier.height(10.dp))
         Row(
             modifier = Modifier
@@ -202,53 +174,75 @@ fun TelaOpcoes() {
                 .padding(horizontal = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            CardDeSug("Viagem", Icons.Outlined.LocationOn)
-            CardDeSug("Envios", Icons.Outlined.ShoppingCart)
-            CardDeSug("Moto", Icons.Outlined.ArrowForward)
+            CardPerfil("VINICIUS LEMES")
         }
         Spacer(modifier = Modifier.height(15.dp))
+
     }
 }
 
+
+
 @Composable
-fun CardDeSug(texto: String, icone: ImageVector) {
-    Column(
+fun CardPerfil(texto: String) {
+    Card(
         modifier = Modifier
-            .width(120.dp)
-            .height(110.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .background(Color.Gray),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+            .fillMaxWidth()
+            .height(140.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.DarkGray)
     ) {
-        Icon(imageVector = icone, contentDescription = texto, modifier = Modifier.size(40.dp))
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(text = texto)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(texto, style = MaterialTheme.typography.titleLarge, color = Color.White)
+                Text(text = "Teste", color = Color.White)
+            }
+
+            Row {
+                Box(
+                    modifier = Modifier
+                        .background(Color.Gray, RoundedCornerShape(12.dp))
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                ) {
+                    Text("5.00", color = Color.White)
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+                Box(
+                    modifier = Modifier
+                        .background(Color.Gray, RoundedCornerShape(12.dp))
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                ) {
+                    Text("Não verificado", color = Color.White)
+                }
+            }
+
+
+        }
+
+        Spacer(modifier = Modifier.width(10.dp))
+        Row(verticalAlignment = Alignment.CenterVertically)
+        {
+            Text(text = "Teste")
+        }
     }
 }
 
-@Composable
-fun SegundoCardDeSug(texto: String, icone: ImageVector) {
-    Column(
-        modifier = Modifier
-            .width(200.dp)
-            .height(140.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .background(Color.Gray),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Icon(imageVector = icone, contentDescription = texto, modifier = Modifier.size(40.dp))
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(text = texto)
-    }
-}
 
 @Preview
 @Composable
-fun PreviewSegundaTela() {
+fun PreviewTerceiraTela() {
     val navController = rememberNavController()
     AppUberTheme {
-        Opcoes(navController)
+        Perfil(navController)
     }
 }

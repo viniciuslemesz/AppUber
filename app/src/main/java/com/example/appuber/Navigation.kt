@@ -13,5 +13,6 @@ fun AppNavigation() {
     NavHost(navController = navController, startDestination = "home") {
         composable("home") { Home(navController) }
         composable("opcoes") { Opcoes(navController) }
+        composable("perfil") { Perfil(navController)}
     }
 }

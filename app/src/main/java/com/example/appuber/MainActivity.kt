@@ -42,7 +42,7 @@ class PrimeiraTela : ComponentActivity() {
 
 @Composable
 fun Home(navController: NavHostController) {
-    var pesquisas by remember { mutableStateOf(listOf<String>()) }
+    var pesquisas by remember { mutableStateOf(listOf("Último Destino Pesquisado:")) }
 
     Scaffold(
         topBar = {
@@ -104,7 +104,7 @@ fun BarraNav(navController: NavHostController) {
                 onClick = { navController.navigate("home") },
                 modifier = Modifier
                     .height(60.dp)
-                    .width(120.dp)
+                    .width(86.dp)
                     .clip(RoundedCornerShape(16.dp)),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
             ) {
@@ -113,18 +113,20 @@ fun BarraNav(navController: NavHostController) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Icon(Icons.Outlined.Home, contentDescription = "Home", modifier = Modifier.size(24.dp))
+                    Icon(Icons.Outlined.Home,
+                        contentDescription = "Home",
+                        modifier = Modifier.size(24.dp))
                     Spacer(modifier = Modifier.height(4.dp))
                     Text("Home")
                 }
             }
 
-            Spacer(modifier = Modifier.width(24.dp))
+            Spacer(modifier = Modifier.width(10.dp))
             Button(
                 onClick = { navController.navigate("opcoes") },
                 modifier = Modifier
                     .height(60.dp)
-                    .width(120.dp)
+                    .width(93.dp)
                     .clip(RoundedCornerShape(16.dp)),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
             ) {
@@ -133,17 +135,58 @@ fun BarraNav(navController: NavHostController) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Icon(Icons.Outlined.MoreVert , contentDescription = "Opcoes", modifier = Modifier.size(24.dp))
+                    Icon(Icons.Outlined.MoreVert ,
+                        contentDescription = "Opcoes",
+                        modifier = Modifier.size(24.dp))
                     Spacer(modifier = Modifier.height(4.dp))
                     Text("Opções")
                 }
             }
-            Spacer(modifier = Modifier.width(24.dp))
-            Icon(Icons.Outlined.Build, contentDescription = "Atividade", modifier = Modifier.size(20.dp))
-            Text(text = "Atividade")
-            Spacer(modifier = Modifier.width(24.dp))
-            Icon(Icons.Outlined.Person, contentDescription = "Conta", modifier = Modifier.size(21.dp))
-            Text(text = "Conta")
+            Spacer(modifier = Modifier.width(10.dp))
+            Button(
+                onClick = { navController.navigate("perfil") },
+                modifier = Modifier
+                    .height(60.dp)
+                    .width(84.dp)
+                    .clip(RoundedCornerShape(16.dp)),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        Icons.Outlined.Build,
+                        contentDescription = "Atividade",
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(text = "Atv.")
+                }
+            }
+
+            Button(
+                onClick = { navController.navigate("perfil") },
+                modifier = Modifier
+                    .height(60.dp)
+                    .width(90.dp)
+                    .clip(RoundedCornerShape(16.dp)),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        Icons.Outlined.Person,
+                        contentDescription = "Conta",
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(text = "Conta")
+                }
+            }
+
         }
     }
 }
@@ -178,7 +221,7 @@ fun BarraPesquisa(aoPesquisar: (String) -> Unit) {
             Icon(Icons.Outlined.Search, contentDescription = "Icone Pesquisa", modifier = Modifier.size(30.dp))
         }
     }
-    Spacer(modifier = Modifier.height(30.dp))
+    Spacer(modifier = Modifier.height(20.dp))
 }
 
 @Composable
@@ -201,7 +244,7 @@ fun Pesquisar(texto: String) {
 @Composable
 fun TelaPrincipal() {
     Column {
-        Spacer(modifier = Modifier.height(25.dp))
+        Spacer(modifier = Modifier.height(29.dp))
         Text(text = "Sugestões", modifier = Modifier.padding(start = 12.dp, top = 16.dp))
         Spacer(modifier = Modifier.height(15.dp))
         Row(
@@ -254,14 +297,14 @@ fun TelaPrincipal() {
 fun CardDeSugestao(texto: String, icone: ImageVector) {
     Column(
         modifier = Modifier
-            .width(120.dp)
-            .height(110.dp)
+            .width(110.dp)
+            .height(100.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(Color.Gray),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Icon(imageVector = icone, contentDescription = texto, modifier = Modifier.size(40.dp))
+        Icon(imageVector = icone, contentDescription = texto, modifier = Modifier.size(33.dp))
         Spacer(modifier = Modifier.height(8.dp))
         Text(text = texto)
     }
