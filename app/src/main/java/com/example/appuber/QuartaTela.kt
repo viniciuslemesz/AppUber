@@ -8,6 +8,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -26,37 +28,37 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.appuber.ui.theme.AppUberTheme
 
-class TerceiraTela : ComponentActivity() {
+class QuartaTela : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             AppUberTheme {
-                val navController = rememberNavController()
-                Perfil(navController)
+                AppNavigation()
             }
         }
     }
 }
 
 @Composable
-fun Perfil(navController: NavHostController) {
+fun Atividade(navController: NavHostController) {
+
     Scaffold(
         topBar = {},
-        bottomBar = { BarraNavigationPerfil(navController) }
+        bottomBar = { BarraNavegar(navController) }
     ) { paddingValues ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            TelaPerfil()
+            TelaAtividade()
         }
     }
 }
 
 @Composable
-fun BarraNavigationPerfil(navController: NavHostController) {
+fun BarraNavegar(navController: NavHostController) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -164,143 +166,41 @@ fun BarraNavigationPerfil(navController: NavHostController) {
 }
 
 @Composable
-fun TelaPerfil() {
+fun TelaAtividade() {
     Column {
-
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(29.dp))
+        Text(text = "Atividade", modifier = Modifier.padding(start = 12.dp, top = 16.dp))
+        Spacer(modifier = Modifier.height(15.dp))
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                .padding(8.dp)
+                .height(120.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .background(Color.Gray),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            CardPerfil("VINICIUS LEMES")
-            Spacer(modifier = Modifier.height(15.dp))
-            CardsPequenosTela("Testando esse card",
-                Icons.Outlined.AccountCircle)
-            CardsPequenosTela("Testando esse card",
-                Icons.Outlined.AccountCircle)
-            CardsPequenosTela("Testando esse card",
-                Icons.Outlined.AccountCircle)
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            CardsGrandeTela("Testando esse card",
-                Icons.Outlined.AccountCircle)
-            CardsGrandeTela("Testando esse card",
-                Icons.Outlined.AccountCircle)
-
-        }
-        Spacer(modifier = Modifier.height(15.dp))
-
-    }
-}
-
-
-
-@Composable
-fun CardPerfil(texto: String) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(140.dp),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.DarkGray)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Text(texto, style = MaterialTheme.typography.titleLarge, color = Color.White)
-                Text(text = "Teste", color = Color.White)
-            }
-
-            Row {
-                Box(
-                    modifier = Modifier
-                        .background(Color.Gray, RoundedCornerShape(12.dp))
-                        .padding(horizontal = 8.dp, vertical = 4.dp)
-                ) {
-                    Text("5.00", color = Color.White)
-                }
-                Spacer(modifier = Modifier.width(8.dp))
-                Box(
-                    modifier = Modifier
-                        .background(Color.Gray, RoundedCornerShape(12.dp))
-                        .padding(horizontal = 8.dp, vertical = 4.dp)
-                ) {
-                    Text("Não verificado", color = Color.White)
-                }
-            }
-
-
-        }
-
-        Spacer(modifier = Modifier.width(10.dp))
-        Row(verticalAlignment = Alignment.CenterVertically)
-        {
-            Text(text = "Teste")
-        }
-    }
-}
-
-@Composable
-fun CardsPequenosTela(texto: String, icone: ImageVector) {
-    Card(
-        modifier = Modifier
-            .width(90.dp)
-            .height(90.dp),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.Gray)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(8.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Icon(
-                imageVector = icone,
-                contentDescription = texto,
-                modifier = Modifier.size(30.dp)
+            Image(
+                painter = painterResource(id = R.drawable.imagem_propaganda_uber),
+                contentDescription = "Propaganda Uber",
+                modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)),
+                contentScale = ContentScale.Crop
             )
-            Spacer(modifier = Modifier.height(6.dp))
-            Text(text = texto)
         }
-    }
-}
-
-
-@Composable
-fun CardsGrandeTela(texto: String, icone: ImageVector) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(70.dp),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.Gray)
-    ) {
         Row(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+                .fillMaxWidth()
+                .padding(8.dp)
+                .height(120.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .background(Color.Gray),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = texto)
-            Icon(
-                imageVector = icone,
-                contentDescription = texto,
-                modifier = Modifier.size(28.dp)
+            Image(
+                painter = painterResource(id = R.drawable.imagem_blackfriday),
+                contentDescription = "Promoção Black Friday",
+                modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)),
+                contentScale = ContentScale.Crop
             )
         }
     }
@@ -309,9 +209,9 @@ fun CardsGrandeTela(texto: String, icone: ImageVector) {
 
 @Preview
 @Composable
-fun PreviewTerceiraTela() {
-    val navController = rememberNavController()
+fun PreviewQuartaTela() {
     AppUberTheme {
-        Perfil(navController)
+        val navController = rememberNavController()
+        Atividade(navController)
     }
 }

@@ -14,5 +14,6 @@ fun AppNavigation() {
         composable("home") { Home(navController) }
         composable("opcoes") { Opcoes(navController) }
         composable("perfil") { Perfil(navController)}
+        composable("atividade"){ Atividade(navController)}
     }
 }
