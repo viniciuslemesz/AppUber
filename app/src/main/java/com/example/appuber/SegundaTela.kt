@@ -16,6 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -49,6 +50,7 @@ fun Opcoes(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .background(Color.DarkGray)
         ) {
             TelaOpcoes()
         }
@@ -116,7 +118,7 @@ fun BarraNavigation(navController: NavHostController) {
             }
             Spacer(modifier = Modifier.width(10.dp))
             Button(
-                onClick = { navController.navigate("perfil") },
+                onClick = { navController.navigate("atividade") },
                 modifier = Modifier
                     .height(60.dp)
                     .width(84.dp)
@@ -167,25 +169,35 @@ fun BarraNavigation(navController: NavHostController) {
 fun TelaOpcoes() {
     Column {
         Spacer(modifier = Modifier.height(25.dp))
-        Text(text = "Sugestões", modifier = Modifier.padding(start = 12.dp, top = 16.dp))
+        Text(
+            text = "Sugestões",
+            modifier = Modifier.padding(start = 12.dp, top = 16.dp),
+            style = MaterialTheme.typography.titleLarge.copy(color = Color.White)
+        )
         Spacer(modifier = Modifier.height(15.dp))
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
-                .height(120.dp)
+                .height(140.dp)
                 .clip(RoundedCornerShape(16.dp))
-                .background(Color.Gray),
+                .background(Color(0xFF2A2A2A))
+                .shadow(4.dp, RoundedCornerShape(16.dp)),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
                 painter = painterResource(id = R.drawable.imagem_blackfriday),
                 contentDescription = "Promoção Black Friday",
-                modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(16.dp)),
                 contentScale = ContentScale.Crop
             )
         }
+
         Spacer(modifier = Modifier.height(15.dp))
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -195,7 +207,9 @@ fun TelaOpcoes() {
             SegundoCardDeSug("Viagem", Icons.Outlined.LocationOn)
             SegundoCardDeSug("Envios", Icons.Outlined.ShoppingCart)
         }
+
         Spacer(modifier = Modifier.height(10.dp))
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -206,7 +220,21 @@ fun TelaOpcoes() {
             CardDeSug("Envios", Icons.Outlined.ShoppingCart)
             CardDeSug("Moto", Icons.Outlined.ArrowForward)
         }
+
         Spacer(modifier = Modifier.height(15.dp))
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(23.dp)
+        ) {
+            CardVerticalFino()
+        }
+
+
+
+
     }
 }
 
@@ -217,13 +245,16 @@ fun CardDeSug(texto: String, icone: ImageVector) {
             .width(120.dp)
             .height(110.dp)
             .clip(RoundedCornerShape(16.dp))
-            .background(Color.Gray),
+            .background(Color.Black)
+            .shadow(2.dp, RoundedCornerShape(16.dp)),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Icon(imageVector = icone, contentDescription = texto, modifier = Modifier.size(40.dp))
+        Icon(imageVector = icone, contentDescription = texto,
+            modifier = Modifier.size(40.dp),
+            tint = Color.White)
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = texto)
+        Text(text = texto, color = Color.White)
     }
 }
 
@@ -234,15 +265,90 @@ fun SegundoCardDeSug(texto: String, icone: ImageVector) {
             .width(200.dp)
             .height(140.dp)
             .clip(RoundedCornerShape(16.dp))
-            .background(Color.Gray),
+            .background(Color.Black)
+            .shadow(2.dp, RoundedCornerShape(16.dp)),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Icon(imageVector = icone, contentDescription = texto, modifier = Modifier.size(40.dp))
+        Icon(imageVector = icone, contentDescription = texto, modifier = Modifier.size(40.dp), tint = Color.White)
         Spacer(modifier = Modifier.height(8.dp))
-        Text(text = texto)
+        Text(text = texto, color = Color.White)
     }
 }
+
+@Composable
+fun CardVerticalFino() {
+    Card(
+        modifier = Modifier
+            .width(80.dp)
+            .height(180.dp)
+            .clip(RoundedCornerShape(12.dp))
+
+            .shadow(2.dp, RoundedCornerShape(12.dp)),
+        colors = CardDefaults.cardColors(containerColor = Color.Black),
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.img1),
+            contentDescription = "Cards",
+            modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(12.dp)),
+            contentScale = ContentScale.Crop
+        )
+    }
+
+    Card(
+        modifier = Modifier
+            .width(80.dp)
+            .height(180.dp)
+            .clip(RoundedCornerShape(12.dp))
+
+            .shadow(2.dp, RoundedCornerShape(12.dp)),
+        colors = CardDefaults.cardColors(containerColor = Color.Black),
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.img2),
+            contentDescription = "Cards",
+            modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(12.dp)),
+            contentScale = ContentScale.Crop
+        )
+    }
+
+    Card(
+        modifier = Modifier
+            .width(80.dp)
+            .height(180.dp)
+            .clip(RoundedCornerShape(12.dp))
+
+            .shadow(2.dp, RoundedCornerShape(12.dp)),
+        colors = CardDefaults.cardColors(containerColor = Color.Black),
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.img3),
+            contentDescription = "Cards",
+            modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(12.dp)),
+            contentScale = ContentScale.Crop
+        )
+    }
+
+    Card(
+        modifier = Modifier
+            .width(80.dp)
+            .height(180.dp)
+            .clip(RoundedCornerShape(12.dp))
+
+            .shadow(2.dp, RoundedCornerShape(12.dp)),
+        colors = CardDefaults.cardColors(containerColor = Color.Black),
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.img4),
+            contentDescription = "Cards",
+            modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(12.dp)),
+            contentScale = ContentScale.Crop
+        )
+    }
+}
+
+
+
 
 @Preview
 @Composable

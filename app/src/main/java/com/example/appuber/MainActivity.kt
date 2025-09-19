@@ -58,8 +58,8 @@ fun Home(navController: NavHostController) {
                     style = MaterialTheme.typography.headlineMedium,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
-                BarraPesquisa(aoPesquisar = { novaNota ->
-                    pesquisas = pesquisas + novaNota
+                BarraPesquisa(aoPesquisar = { novaMensagem ->
+                    pesquisas = pesquisas + novaMensagem
                 })
             }
         },
@@ -69,6 +69,7 @@ fun Home(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .background(Color.DarkGray)
         ) {
             Spacer(modifier = Modifier.height(20.dp))
             LazyColumn {
@@ -98,8 +99,6 @@ fun BarraNav(navController: NavHostController) {
                 .padding(20.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-
-
             Button(
                 onClick = { navController.navigate("home") },
                 modifier = Modifier
@@ -108,20 +107,22 @@ fun BarraNav(navController: NavHostController) {
                     .clip(RoundedCornerShape(16.dp)),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
             ) {
-
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Icon(Icons.Outlined.Home,
+                    Icon(
+                        Icons.Outlined.Home,
                         contentDescription = "Home",
-                        modifier = Modifier.size(24.dp))
+                        modifier = Modifier.size(24.dp)
+                    )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text("Home")
                 }
             }
 
             Spacer(modifier = Modifier.width(10.dp))
+
             Button(
                 onClick = { navController.navigate("opcoes") },
                 modifier = Modifier
@@ -130,21 +131,24 @@ fun BarraNav(navController: NavHostController) {
                     .clip(RoundedCornerShape(16.dp)),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
             ) {
-
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Icon(Icons.Outlined.MoreVert ,
+                    Icon(
+                        Icons.Outlined.MoreVert,
                         contentDescription = "Opcoes",
-                        modifier = Modifier.size(24.dp))
+                        modifier = Modifier.size(24.dp)
+                    )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text("Opções")
                 }
             }
+
             Spacer(modifier = Modifier.width(10.dp))
+
             Button(
-                onClick = { navController.navigate("perfil") },
+                onClick = { navController.navigate("atividade") },
                 modifier = Modifier
                     .height(60.dp)
                     .width(84.dp)
@@ -164,6 +168,8 @@ fun BarraNav(navController: NavHostController) {
                     Text(text = "Atv.")
                 }
             }
+
+            Spacer(modifier = Modifier.width(10.dp))
 
             Button(
                 onClick = { navController.navigate("perfil") },
@@ -186,7 +192,6 @@ fun BarraNav(navController: NavHostController) {
                     Text(text = "Conta")
                 }
             }
-
         }
     }
 }
@@ -218,7 +223,11 @@ fun BarraPesquisa(aoPesquisar: (String) -> Unit) {
                 }
             }
         ) {
-            Icon(Icons.Outlined.Search, contentDescription = "Icone Pesquisa", modifier = Modifier.size(30.dp))
+            Icon(
+                Icons.Outlined.Search,
+                contentDescription = "Icone Pesquisa",
+                modifier = Modifier.size(30.dp)
+            )
         }
     }
     Spacer(modifier = Modifier.height(20.dp))
@@ -235,7 +244,11 @@ fun Pesquisar(texto: String) {
             .background(Color.Gray),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(Icons.Outlined.Refresh, contentDescription = "Icone pesquisa", modifier = Modifier.size(25.dp))
+        Icon(
+            Icons.Outlined.Refresh,
+            contentDescription = "Icone pesquisa",
+            modifier = Modifier.size(25.dp)
+        )
         Spacer(modifier = Modifier.width(8.dp))
         Text(text = texto)
     }
@@ -245,18 +258,22 @@ fun Pesquisar(texto: String) {
 fun TelaPrincipal() {
     Column {
         Spacer(modifier = Modifier.height(29.dp))
-        Text(text = "Sugestões", modifier = Modifier.padding(start = 12.dp, top = 16.dp))
+        Text(
+            text = "Sugestões",
+            modifier = Modifier.padding(start = 12.dp, top = 16.dp)
+        )
         Spacer(modifier = Modifier.height(15.dp))
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             CardDeSugestao("Viagem", Icons.Outlined.LocationOn)
             CardDeSugestao("Envios", Icons.Outlined.ShoppingCart)
             CardDeSugestao("Moto", Icons.Outlined.ArrowForward)
         }
+
         Spacer(modifier = Modifier.height(15.dp))
         Row(
             modifier = Modifier
@@ -270,7 +287,9 @@ fun TelaPrincipal() {
             Image(
                 painter = painterResource(id = R.drawable.imagem_propaganda_uber),
                 contentDescription = "Propaganda Uber",
-                modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(16.dp)),
                 contentScale = ContentScale.Crop
             )
         }
@@ -286,7 +305,9 @@ fun TelaPrincipal() {
             Image(
                 painter = painterResource(id = R.drawable.imagem_blackfriday),
                 contentDescription = "Promoção Black Friday",
-                modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(RoundedCornerShape(16.dp)),
                 contentScale = ContentScale.Crop
             )
         }
@@ -304,7 +325,11 @@ fun CardDeSugestao(texto: String, icone: ImageVector) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Icon(imageVector = icone, contentDescription = texto, modifier = Modifier.size(33.dp))
+        Icon(
+            imageVector = icone,
+            contentDescription = texto,
+            modifier = Modifier.size(33.dp)
+        )
         Spacer(modifier = Modifier.height(8.dp))
         Text(text = texto)
     }

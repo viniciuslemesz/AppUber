@@ -4,23 +4,18 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
-import androidx.compose.material3.CardDefaults
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -49,6 +44,7 @@ fun Perfil(navController: NavHostController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .background(Color(0xFF1E1E1E))
         ) {
             TelaPerfil()
         }
@@ -66,11 +62,11 @@ fun BarraNavigationPerfil(navController: NavHostController) {
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(20.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .fillMaxSize()
+                .padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-
 
             Button(
                 onClick = { navController.navigate("home") },
@@ -80,20 +76,15 @@ fun BarraNavigationPerfil(navController: NavHostController) {
                     .clip(RoundedCornerShape(16.dp)),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
             ) {
-
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Icon(Icons.Outlined.Home,
-                        contentDescription = "Home",
-                        modifier = Modifier.size(24.dp))
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text("Home")
+                    Icon(Icons.Outlined.Home, contentDescription = "Home", modifier = Modifier.size(24.dp))
+                    Text("Home", style = MaterialTheme.typography.labelSmall, color = Color.White)
                 }
             }
 
-            Spacer(modifier = Modifier.width(10.dp))
             Button(
                 onClick = { navController.navigate("opcoes") },
                 modifier = Modifier
@@ -102,21 +93,17 @@ fun BarraNavigationPerfil(navController: NavHostController) {
                     .clip(RoundedCornerShape(16.dp)),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Gray)
             ) {
-
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Icon(Icons.Outlined.MoreVert ,
-                        contentDescription = "Opcoes",
-                        modifier = Modifier.size(24.dp))
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text("Opções")
+                    Icon(Icons.Outlined.MoreVert, contentDescription = "Opcoes", modifier = Modifier.size(24.dp))
+                    Text("Opções", style = MaterialTheme.typography.labelSmall, color = Color.White)
                 }
             }
-            Spacer(modifier = Modifier.width(10.dp))
+
             Button(
-                onClick = { navController.navigate("perfil") },
+                onClick = { navController.navigate("atividade") },
                 modifier = Modifier
                     .height(60.dp)
                     .width(84.dp)
@@ -127,13 +114,8 @@ fun BarraNavigationPerfil(navController: NavHostController) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Icon(
-                        Icons.Outlined.Build,
-                        contentDescription = "Atividade",
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(text = "Atv.")
+                    Icon(Icons.Outlined.Build, contentDescription = "Atividade", modifier = Modifier.size(24.dp))
+                    Text("Atv.", style = MaterialTheme.typography.labelSmall, color = Color.White)
                 }
             }
 
@@ -149,63 +131,50 @@ fun BarraNavigationPerfil(navController: NavHostController) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    Icon(
-                        Icons.Outlined.Person,
-                        contentDescription = "Conta",
-                        modifier = Modifier.size(24.dp)
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(text = "Conta")
+                    Icon(Icons.Outlined.Person, contentDescription = "Conta",
+                        modifier = Modifier.size(24.dp))
+                    Text("Conta", style = MaterialTheme.typography.labelSmall, color = Color.White)
                 }
             }
-
         }
     }
 }
 
 @Composable
 fun TelaPerfil() {
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        CardPerfil("VINICIUS LEMES")
 
-        Spacer(modifier = Modifier.height(10.dp))
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            CardPerfil("VINICIUS LEMES")
-            Spacer(modifier = Modifier.height(15.dp))
-            CardsPequenosTela("Testando esse card",
-                Icons.Outlined.AccountCircle)
-            CardsPequenosTela("Testando esse card",
-                Icons.Outlined.AccountCircle)
-            CardsPequenosTela("Testando esse card",
-                Icons.Outlined.AccountCircle)
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            CardsGrandeTela("Testando esse card",
-                Icons.Outlined.AccountCircle)
-            CardsGrandeTela("Testando esse card",
-                Icons.Outlined.AccountCircle)
-
+            CardsPequenosTela("Ajuda", Icons.Outlined.AddCircle)
+            CardsPequenosTela("Carteira", Icons.Outlined.Email)
+            CardsPequenosTela("Mensagem", Icons.Outlined.Email)
         }
-        Spacer(modifier = Modifier.height(15.dp))
 
+        CardsGrandeTela("Pacotes Uber", Icons.Outlined.DateRange)
+        CardsGrandeTela("Experimentar", Icons.Outlined.Done)
+        CardsMedioTela("Checagem de Segurança", Icons.Outlined.Lock)
+        CardsMedioTela("Redução Estimada de CO2", Icons.Outlined.ThumbUp)
     }
 }
-
-
 
 @Composable
 fun CardPerfil(texto: String) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(140.dp),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.DarkGray)
+            .height(150.dp),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF2C2C2C)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Column(
             modifier = Modifier
@@ -220,13 +189,15 @@ fun CardPerfil(texto: String) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(texto, style = MaterialTheme.typography.titleLarge, color = Color.White)
-                Text(text = "Teste", color = Color.White)
+                Icon(Icons.Outlined.Person,
+                    contentDescription = "Conta",
+                    modifier = Modifier.size(80.dp))
             }
 
             Row {
                 Box(
                     modifier = Modifier
-                        .background(Color.Gray, RoundedCornerShape(12.dp))
+                        .background(Color(0xFF3A3A3A), RoundedCornerShape(12.dp))
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 ) {
                     Text("5.00", color = Color.White)
@@ -234,20 +205,17 @@ fun CardPerfil(texto: String) {
                 Spacer(modifier = Modifier.width(8.dp))
                 Box(
                     modifier = Modifier
-                        .background(Color.Gray, RoundedCornerShape(12.dp))
+                        .background(Color(0xFF3A3A3A), RoundedCornerShape(12.dp))
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 ) {
                     Text("Não verificado", color = Color.White)
                 }
             }
-
-
         }
 
-        Spacer(modifier = Modifier.width(10.dp))
-        Row(verticalAlignment = Alignment.CenterVertically)
-        {
-            Text(text = "Teste")
+        Spacer(modifier = Modifier.height(10.dp))
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(text = "Teste", color = Color.White)
         }
     }
 }
@@ -256,10 +224,11 @@ fun CardPerfil(texto: String) {
 fun CardsPequenosTela(texto: String, icone: ImageVector) {
     Card(
         modifier = Modifier
-            .width(90.dp)
-            .height(90.dp),
+            .width(110.dp)
+            .height(110.dp),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.Gray)
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF3A3A3A)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
         Column(
             modifier = Modifier
@@ -271,23 +240,24 @@ fun CardsPequenosTela(texto: String, icone: ImageVector) {
             Icon(
                 imageVector = icone,
                 contentDescription = texto,
-                modifier = Modifier.size(30.dp)
+                modifier = Modifier.size(32.dp),
+                tint = Color(0xFFFFC107)
             )
             Spacer(modifier = Modifier.height(6.dp))
-            Text(text = texto)
+            Text(text = texto, color = Color.White)
         }
     }
 }
-
 
 @Composable
 fun CardsGrandeTela(texto: String, icone: ImageVector) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(70.dp),
+            .height(100.dp),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.Gray)
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF3A3A3A)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
         Row(
             modifier = Modifier
@@ -296,19 +266,47 @@ fun CardsGrandeTela(texto: String, icone: ImageVector) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = texto)
+            Text(text = texto, color = Color.White)
             Icon(
                 imageVector = icone,
                 contentDescription = texto,
-                modifier = Modifier.size(28.dp)
+                modifier = Modifier.size(56.dp),
+                tint = Color(0xFFFFC107)
             )
         }
     }
 }
 
-
-@Preview
 @Composable
+fun CardsMedioTela(texto: String, icone: ImageVector) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(70.dp),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFF3A3A3A)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(text = texto, color = Color.White)
+            Icon(
+                imageVector = icone,
+                contentDescription = texto,
+                modifier = Modifier.size(42.dp),
+                tint = Color(0xFFFFC107)
+            )
+        }
+    }
+}
+
+@Composable
+//@Preview
 fun PreviewTerceiraTela() {
     val navController = rememberNavController()
     AppUberTheme {

@@ -118,7 +118,7 @@ fun BarraNavegar(navController: NavHostController) {
             }
             Spacer(modifier = Modifier.width(10.dp))
             Button(
-                onClick = { navController.navigate("perfil") },
+                onClick = { navController.navigate("atividade") },
                 modifier = Modifier
                     .height(60.dp)
                     .width(84.dp)
@@ -167,44 +167,117 @@ fun BarraNavegar(navController: NavHostController) {
 
 @Composable
 fun TelaAtividade() {
-    Column {
-        Spacer(modifier = Modifier.height(29.dp))
-        Text(text = "Atividade", modifier = Modifier.padding(start = 12.dp, top = 16.dp))
-        Spacer(modifier = Modifier.height(15.dp))
-        Row(
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.DarkGray)
+            .padding(12.dp)
+    ) {
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Atividade",
+            color = Color.White,
+            style = MaterialTheme.typography.titleLarge
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Agendadas",
+            color = Color.White,
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
-                .height(120.dp)
-                .clip(RoundedCornerShape(16.dp))
-                .background(Color.Gray),
-            verticalAlignment = Alignment.CenterVertically
+                .height(120.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.Gray),
+            shape = RoundedCornerShape(16.dp)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.imagem_propaganda_uber),
                 contentDescription = "Propaganda Uber",
-                modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)),
+                modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
         }
-        Row(
+        Spacer(modifier = Modifier.height(18.dp))
+        Card(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(210.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.Gray),
+            shape = RoundedCornerShape(16.dp)
+        ) {
+            CardImagem()
+        }
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(
+            text = "Anteriores",
+            color = Color.White,
+            style = MaterialTheme.typography.bodyMedium
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        CardAnterior(texto = "R. TalTal, 270\n 12 de jul. - 17:28\n R$37,83")
+        Spacer(modifier = Modifier.height(8.dp))
+        CardAnterior(texto = "R. Blabla, 270\n 5 de set. - 12:38\n R$46,33")
+    }
+}
+
+@Composable
+fun CardAnterior(texto: String) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(100.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.Gray),
+        shape = RoundedCornerShape(16.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(12.dp),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            Text(text = texto, color = Color.White)
+        }
+    }
+    Spacer(modifier = Modifier.height(16.dp))
+}
+
+@Composable
+fun CardImagem() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(240.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.Gray),
+        shape = RoundedCornerShape(16.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
                 .padding(8.dp)
-                .height(120.dp)
-                .clip(RoundedCornerShape(16.dp))
-                .background(Color.Gray),
-            verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = painterResource(id = R.drawable.imagem_blackfriday),
-                contentDescription = "Promoção Black Friday",
-                modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)),
+                painter = painterResource(id = R.drawable.imagemcard),
+                contentDescription = "Imagem Mapa Uber",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(160.dp)
+                    .clip(RoundedCornerShape(16.dp)),
                 contentScale = ContentScale.Crop
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "R. TalTal, 270, 12 de jul. - 17:28 - R$37,83",
+                color = Color.White,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(start = 8.dp)
             )
         }
     }
 }
+
 
 
 @Preview
